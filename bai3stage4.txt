@@ -1,0 +1,62 @@
+Bài làm :
+– Thiết kế hệ thống IoT "Trang trại Lan thông minh"
+
+1. Kiến trúc 4 tầng DIKW
+
+┌─────────────────────────────────────────────┐
+│ WISDOM – TRI THỨC SÂU                       │
+│ Dựa vào dự báo thời tiết dài hạn để         │
+│ tối ưu lượng nước tưới, tránh tưới quá nhiều│
+└──────────────────────┬──────────────────────┘
+                       |
+┌──────────────────────┴──────────────────────┐
+│ KNOWLEDGE – KIẾN THỨC                       │
+│ Hệ thống phân tích dữ liệu và đặt điều kiện  │
+│ Nếu nhiệt độ > 35°C -> tự động bật máy bơm   │
+└──────────────────────┬──────────────────────┘
+                       |
+┌──────────────────────┴──────────────────────┐
+│ INFORMATION – THÔNG TIN                     │
+│ Xử lý dữ liệu cảm biến và gửi thông báo      │
+│ cho chủ vườn khi nhiệt độ/độ ẩm bất thường   │
+└──────────────────────┬──────────────────────┘
+                       |
+┌──────────────────────┴──────────────────────┐
+│ DATA – DỮ LIỆU                               │
+│ Cảm biến thu thập: nhiệt độ, độ ẩm đất,     │
+│ thời gian và trạng thái máy bơm              │
+└─────────────────────────────────────────────┘
+
+Luồng hoạt động:
+
+Cảm biến -> Thu thập dữ liệu -> Xử lý dữ liệu -> Đưa ra quyết định -> Điều khiển máy bơm -> Tối ưu lượng nước.
+
+2. Xử lý file cấu hình .env và .git
+
+- File .env chứa mật khẩu và thông tin kết nối nên phải được bảo vệ, không chia sẻ công khai.
+- Khi bật Hidden Items, có thể nhìn thấy các file ẩn như .env và .git.
+- Không nên xóa .env khi dọn dẹp vì có thể làm hệ thống không kết nối được với máy bơm.
+- Thư mục .git chứa thông tin của Git repository nên cũng không được tự ý xóa.
+- Có thể thêm .env vào .gitignore để tránh đưa thông tin mật khẩu lên repository.
+
+3. Tính dung lượng lưu trữ
+
+- Hệ thống tạo ra 50 MB/ngày.
+
+- Một năm:
+
+50 × 365 = 18.250 MB
+
+- Đổi ra GB:
+
+18.250 : 1024 = 17,82 GB
+
+- Do ổ cứng chỉ nên sử dụng tối đa 70%, dung lượng ổ cứng cần có là:
+
+17,82 : 0,7 = 25,46 GB
+
+=> Vì vậy nên chọn ổ cứng ít nhất khoảng 26 GB, thực tế nên chọn ổ 32 GB trở lên để có thêm dung lượng dự phòng.
+
+4. Kết luận
+
+=>Hệ thống "Trang trại Lan thông minh" sử dụng mô hình DIKW để biến dữ liệu cảm biến thành hành động tự động. Cảm biến thu thập dữ liệu, hệ thống xử lý thành thông tin, đưa ra quyết định bật máy bơm khi cần và sử dụng dự báo thời tiết để tối ưu lượng nước tưới. Các file .env và .git cũng cần được quản lý cẩn thận để tránh mất cấu hình hoặc làm lộ thông tin mật khẩu.
